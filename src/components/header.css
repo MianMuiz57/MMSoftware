@@ -1,0 +1,478 @@
+/* ===== RESET & BASE STYLES ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== CSS VARIABLES - DARK THEME ONLY ===== */
+:root {
+  /* Dark theme colors - Professional palette */
+  --bg-primary: #0a0c0f;
+  --bg-secondary: #14181c;
+  --bg-elevated: #1e2429;
+  
+  --text-primary: #ffffff;
+  --text-secondary: #a0a8b3;
+  --text-muted: #6c7a8a;
+  
+  --accent-primary: #6366f1;
+  --accent-hover: #8183f3;
+  --accent-glow: rgba(99, 102, 241, 0.15);
+  
+  --border-color: #2a323c;
+  --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  
+  --gradient-1: linear-gradient(135deg, #6366f1, #8b5cf6);
+  --gradient-2: linear-gradient(135deg, #1e2429, #14181c);
+  
+  /* 3D effect variables */
+  --depth-1: translateZ(20px);
+  --depth-2: translateZ(40px);
+  --depth-3: translateZ(60px);
+  --depth-bg: translateZ(-50px);
+  
+  /* Spacing */
+  --header-height: 80px;
+  --container-padding: 2rem;
+}
+
+/* ===== 3D BACKGROUND ANIMATION ===== */
+.three-d-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.three-d-bg::before {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background: radial-gradient(circle at 30% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 70% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+  animation: rotate3D 20s linear infinite;
+  transform-style: preserve-3d;
+  transform: rotate(0deg) scale(1);
+}
+
+.three-d-bg::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 20px,
+    rgba(99, 102, 241, 0.02) 20px,
+    rgba(99, 102, 241, 0.02) 40px
+  );
+  animation: moveGrid 15s linear infinite;
+}
+
+/* Floating particles for 3D effect */
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--accent-primary);
+  border-radius: 50%;
+  opacity: 0.3;
+  filter: blur(1px);
+  animation: floatParticle 10s infinite ease-in-out;
+  transform-style: preserve-3d;
+}
+
+/* Generate multiple particles with different positions */
+.particle:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; width: 6px; height: 6px; }
+.particle:nth-child(2) { top: 60%; left: 80%; animation-delay: 2s; width: 8px; height: 8px; }
+.particle:nth-child(3) { top: 80%; left: 20%; animation-delay: 4s; width: 4px; height: 4px; }
+.particle:nth-child(4) { top: 30%; left: 90%; animation-delay: 1s; width: 10px; height: 10px; }
+.particle:nth-child(5) { top: 70%; left: 30%; animation-delay: 3s; width: 5px; height: 5px; }
+.particle:nth-child(6) { top: 40%; left: 50%; animation-delay: 5s; width: 7px; height: 7px; }
+.particle:nth-child(7) { top: 90%; left: 70%; animation-delay: 2.5s; width: 6px; height: 6px; }
+.particle:nth-child(8) { top: 15%; left: 40%; animation-delay: 3.5s; width: 9px; height: 9px; }
+
+/* ===== HEADER STYLES WITH 3D EFFECT ===== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  background: rgba(10, 12, 15, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--container-padding);
+  z-index: 1000;
+  transition: all 0.3s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+/* 3D Tilt effect on header */
+.header:hover {
+  transform: rotateX(2deg) rotateY(-1deg) var(--depth-1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Add shadow on scroll */
+.header.scrolled {
+  box-shadow: var(--card-shadow);
+  background: rgba(10, 12, 15, 0.95);
+  transform: translateY(-5px) var(--depth-1);
+}
+
+/* ===== LOGO STYLES WITH 3D ===== */
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: var(--gradient-1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: -0.5px;
+  cursor: pointer;
+  position: relative;
+  padding: 0.5rem 0;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+
+
+.logo::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--gradient-1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  opacity: 0.3;
+  filter: blur(8px);
+  transform: var(--depth-bg);
+  z-index: -1;
+}
+
+.logo::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  height: 3px;
+  background: var(--gradient-1);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+  transform: var(--depth-1);
+}
+
+.logo:hover::after {
+  width: 100%;
+}
+
+/* ===== NAVIGATION LINKS WITH 3D ===== */
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+  transform-style: preserve-3d;
+}
+
+.nav-links li {
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+}
+
+.nav-links li:hover {
+  transform: var(--depth-1);
+}
+
+.nav-links li a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.5rem 0;
+  position: relative;
+  transition: color 0.3s ease;
+  display: inline-block;
+}
+
+.nav-links li a::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gradient-1);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+  transform: var(--depth-1);
+}
+
+.nav-links li a::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--text-primary);
+  opacity: 0.2;
+  filter: blur(4px);
+  transform: var(--depth-bg);
+  z-index: -1;
+  white-space: nowrap;
+}
+
+.nav-links li a:hover {
+  color: var(--text-primary);
+  transform: var(--depth-1);
+}
+
+.nav-links li a:hover::before {
+  width: 100%;
+}
+
+/* Active link styling */
+.nav-links li a.active {
+  color: var(--text-primary);
+}
+
+.nav-links li a.active::before {
+  width: 100%;
+}
+
+/* ===== CONTACT BUTTON WITH 3D ===== */
+.contact-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 2rem;
+  background: var(--gradient-1);
+  color: white;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px var(--accent-glow);
+  transform-style: preserve-3d;
+}
+
+.contact-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.contact-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  filter: blur(20px);
+  opacity: 0;
+  transform: var(--depth-bg);
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+
+
+.contact-btn:hover::after {
+  opacity: 0.7;
+}
+
+.contact-btn:hover::before {
+  left: 100%;
+}
+
+.contact-btn:active {
+  transform: var(--depth-1) translateY(0);
+}
+
+/* ===== 3D ANIMATIONS ===== */
+@keyframes rotate3D {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  100% {
+    transform: rotate(360deg) scale(1.2);
+  }
+}
+
+@keyframes moveGrid {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  100% {
+    transform: translateX(40px) translateY(40px);
+  }
+}
+
+@keyframes floatParticle {
+  0%, 100% {
+    transform: translateZ(0) translateY(0) translateX(0);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translateZ(50px) translateY(-30px) translateX(20px);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateZ(100px) translateY(0) translateX(-20px);
+    opacity: 0.8;
+  }
+  75% {
+    transform: translateZ(50px) translateY(30px) translateX(10px);
+    opacity: 0.6;
+  }
+}
+
+@keyframes fadeInDown3D {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px) translateZ(-100px) rotateX(-10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) translateZ(0) rotateX(0);
+  }
+}
+
+.header {
+  animation: fadeInDown3D 1s ease forwards;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Tablet (768px to 1024px) */
+@media screen and (max-width: 1024px) {
+  :root {
+    --container-padding: 1.5rem;
+  }
+
+  .nav-links {
+    gap: 1.8rem;
+  }
+
+  .logo {
+    font-size: 1.6rem;
+  }
+}
+
+/* Mobile (up to 768px) */
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 0 var(--container-padding);
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+  }
+
+  .contact-btn {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .particle {
+    display: none; /* Hide particles on mobile for performance */
+  }
+}
+
+/* Small Mobile (up to 480px) */
+@media screen and (max-width: 480px) {
+  :root {
+    --container-padding: 1rem;
+    --header-height: 70px;
+  }
+
+  .contact-btn {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.85rem;
+  }
+
+  .logo {
+    font-size: 1.3rem;
+  }
+}
+
+/* ===== SCROLL EFFECT JAVASCRIPT ===== */
+/* 
+   Add this useEffect in your Header component:
+   
+   useEffect(() => {
+     const handleScroll = () => {
+       const header = document.querySelector('.header');
+       if (window.scrollY > 50) {
+         header.classList.add('scrolled');
+       } else {
+         header.classList.remove('scrolled');
+       }
+     };
+     
+     window.addEventListener('scroll', handleScroll);
+     return () => window.removeEventListener('scroll', handleScroll);
+   }, []);
+*/
+
+/* ===== MOBILE MENU BUTTON ===== */
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+}
+
+.menu-btn:hover {
+  transform: var(--depth-1);
+}
+
+@media screen and (max-width: 768px) {
+  .menu-btn {
+    display: block;
+  }
+}

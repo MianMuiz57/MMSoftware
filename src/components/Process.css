@@ -1,0 +1,439 @@
+/* ===== PROCESS SECTION STYLES ===== */
+.process {
+  position: relative;
+  padding: 8rem 2rem;
+  background: var(--bg-primary, #0a0c0f);
+  overflow: hidden;
+}
+
+/* ===== BACKGROUND EFFECTS ===== */
+.process::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-primary, #6366f1), transparent);
+}
+
+.process::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 70% 30%, rgba(99, 102, 241, 0.03) 0%, transparent 50%),
+              radial-gradient(circle at 30% 70%, rgba(139, 92, 246, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* ===== SECTION HEADER ===== */
+.process h2 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #ffffff 0%, #a0a8b3 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  position: relative;
+  z-index: 2;
+}
+
+.process h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  border-radius: 2px;
+}
+
+.process > p {
+  text-align: center;
+  color: var(--text-secondary, #a0a8b3);
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto 4rem auto;
+  line-height: 1.8;
+  position: relative;
+  z-index: 2;
+  font-style: italic;
+}
+
+.process > p::before,
+.process > p::after {
+  content: '✦';
+  color: var(--accent-primary, #6366f1);
+  font-size: 1rem;
+  margin: 0 1rem;
+  opacity: 0.5;
+}
+
+/* ===== PROCESS GRID ===== */
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* Connection line between cards */
+.process-grid::before {
+  content: '';
+  position: absolute;
+  top: 30%;
+  left: 10%;
+  width: 80%;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent,
+    var(--accent-primary, #6366f1) 20%,
+    var(--accent-primary, #6366f1) 80%,
+    transparent
+  );
+  opacity: 0.2;
+  transform: translateY(-50%);
+  z-index: -1;
+}
+
+/* ===== PROCESS CARD ===== */
+.process-card {
+  background: var(--bg-elevated, #1e2429);
+  border: 1px solid var(--border-color, #2a323c);
+  border-radius: 24px;
+  padding: 2.5rem 1.5rem;
+  position: relative;
+  transition: all 0.4s ease;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Card hover effect */
+.process-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--accent-primary, #6366f1);
+  box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+}
+
+/* Gradient overlay on hover */
+.process-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(99, 102, 241, 0.1),
+    rgba(139, 92, 246, 0.1)
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.process-card:hover::before {
+  opacity: 1;
+}
+
+/* Glow effect on hover */
+.process-card::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border-radius: 24px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -2;
+}
+
+.process-card:hover::after {
+  opacity: 0.3;
+}
+
+/* ===== STEP NUMBER ===== */
+.step-number {
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(139, 92, 246, 0.3));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.step-number::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -10px;
+  width: 30px;
+  height: 30px;
+  background: var(--accent-primary, #6366f1);
+  border-radius: 50%;
+  opacity: 0.1;
+  transform: translateY(-50%);
+}
+
+.step-number::after {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  border-radius: 2px;
+  opacity: 0.5;
+}
+
+/* ===== CARD TITLE ===== */
+.process-card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary, #ffffff);
+  margin-bottom: 1rem;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.process-card:hover h3 {
+  color: var(--accent-primary, #6366f1);
+}
+
+/* ===== CARD DESCRIPTION ===== */
+.process-card p {
+  color: var(--text-secondary, #a0a8b3);
+  line-height: 1.7;
+  font-size: 0.95rem;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.process-card:hover p {
+  color: var(--text-primary, #ffffff);
+}
+
+/* ===== CONNECTION DOTS ===== */
+.process-card:not(:last-child)::before {
+  content: '●';
+  position: absolute;
+  top: 30%;
+  right: -1.5rem;
+  transform: translateY(-50%);
+  color: var(--accent-primary, #6366f1);
+  font-size: 1rem;
+  opacity: 0.5;
+  z-index: 3;
+  animation: pulse 2s ease infinite;
+}
+
+/* ===== DECORATIVE ELEMENTS ===== */
+.process .decorative-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(99, 102, 241, 0.1), transparent);
+  z-index: 1;
+}
+
+.process .decorative-circle-1 {
+  width: 300px;
+  height: 300px;
+  top: -100px;
+  left: -100px;
+}
+
+.process .decorative-circle-2 {
+  width: 400px;
+  height: 400px;
+  bottom: -200px;
+  right: -200px;
+  background: radial-gradient(circle at center, rgba(139, 92, 246, 0.1), transparent);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: translateY(-50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.2);
+  }
+}
+
+.process h2 {
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.process > p {
+  animation: fadeInUp 0.8s ease 0.2s forwards;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+.process-card {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.process-card:nth-child(1) { animation-delay: 0.3s; }
+.process-card:nth-child(2) { animation-delay: 0.5s; }
+.process-card:nth-child(3) { animation-delay: 0.7s; }
+.process-card:nth-child(4) { animation-delay: 0.9s; }
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Large Desktop */
+@media screen and (max-width: 1200px) {
+  .process-grid {
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+}
+
+/* Tablet */
+@media screen and (max-width: 1024px) {
+  .process {
+    padding: 6rem 2rem;
+  }
+
+  .process-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .process-grid::before {
+    display: none; /* Hide connection line on tablet */
+  }
+
+  .process-card:not(:last-child)::before {
+    display: none; /* Hide connection dots */
+  }
+
+  .step-number {
+    font-size: 3.5rem;
+  }
+}
+
+/* Mobile */
+@media screen and (max-width: 768px) {
+  .process {
+    padding: 4rem 1.5rem;
+  }
+
+  .process h2 {
+    font-size: 2.5rem;
+  }
+
+  .process > p {
+    font-size: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .process > p::before,
+  .process > p::after {
+    display: none;
+  }
+
+  .process-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 400px;
+  }
+
+  .process-card {
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+
+  .step-number {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .step-number::before {
+    width: 20px;
+    height: 20px;
+    right: -5px;
+  }
+
+  .process-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .process-card p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Small Mobile */
+@media screen and (max-width: 480px) {
+  .process {
+    padding: 3rem 1rem;
+  }
+
+  .process h2 {
+    font-size: 2rem;
+  }
+
+  .process-card {
+    padding: 1.8rem 1.2rem;
+  }
+
+  .step-number {
+    font-size: 2.5rem;
+  }
+
+  .process-card h3 {
+    font-size: 1.2rem;
+  }
+}
+
+/* ===== DARK THEME ENHANCEMENTS ===== */
+@media (prefers-color-scheme: dark) {
+  .process-card {
+    background: rgba(30, 36, 41, 0.8);
+    backdrop-filter: blur(10px);
+  }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  .process {
+    background: white;
+    color: black;
+  }
+  
+  .process-card {
+    break-inside: avoid;
+    border: 1px solid #ddd;
+  }
+}

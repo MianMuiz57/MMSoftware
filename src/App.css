@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #151515;
+  background-color: #fcfcfc;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .process-grid { grid-template-columns: repeat(2, 1fr); }
+  .works-grid { grid-template-columns: repeat(2, 1fr); }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 3.2rem; }
+}
+
+@media (max-width: 600px) {
+  .process-grid { grid-template-columns: 1fr; }
+  .works-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+}
